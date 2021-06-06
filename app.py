@@ -87,10 +87,14 @@ def geocode(user_id):
         latitude = gmaps_data['results'][0]['geometry']['location']['lat']
         longitude = gmaps_data['results'][0]['geometry']['location']['lng']
         maps_link = f"https://www.google.com/maps/@{latitude},{longitude},{zoom}"
-    except Exception:
-        latitude = ""
-        longitude = ""
-        maps_link = ""
+    except Exception as e:
+        return jsonify({
+            'error': "Error occurred getting gmaps data.",
+            'additional_info': gmaps_data,
+            'address': address,
+            'exception_info': str(e),
+            'api_key': geocode_api.API_KEY
+        })
 
     data = {
         'maps_link': maps_link,
