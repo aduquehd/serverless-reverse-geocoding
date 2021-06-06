@@ -7,7 +7,7 @@ plugins:
 custom:
   tableName: 'users-table-${self:provider.stage}'
   geocodeTableName: 'geocode-history-table-${self:provider.stage}'
-#  googleAPiKey: 'AIzaSyC7xTfdxhDYYbubA0vnGYtNIkodxcP7Tz4'
+  googleAPiKey: 'some-key'
   wsgi:
     app: app.app
     packRequirements: false
@@ -40,7 +40,7 @@ provider:
   environment:
     USERS_TABLE: ${self:custom.tableName}
     GEOCODE_TABLE: ${self:custom.geocodeTableName}
-    GOOGLE_GEOCODING_API_KEY: some-key
+    GOOGLE_GEOCODING_API_KEY: ${self:custom.googleAPiKey}
 
 functions:
   app:
