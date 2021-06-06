@@ -16,6 +16,7 @@ export AWS_DEFAULT_REGION=us-east-1
 ```
 
 ###### Note: You should to create the env variable GOOGLE_GEOCODING_API_KEY in aws Lambda function.
+
 ###### Or, add the correct API key value in serverless.yml file.
 
 ### Python dependencies:
@@ -50,6 +51,8 @@ export AWS_DEFAULT_REGION=us-east-1
 [POST] /users
 
 Create a user
+name: User name, e.g. "Andres Duque".
+userId: user ID. e.g. "saduqz".
 
 {
   "name": "Andres Duque",
@@ -66,21 +69,19 @@ Create a user
 ### Get user information (users data and previously geocoding created).
 
 ```
-[POST] /users/{user-id}
-
-Get a user
+[GET] /users/{user-id}
 
 # response
 {
     "geodata": [
         {
-            "address": "address used in the request",
-            "created": "2021-06-06T00:32:24.292722",
-            "id": "UUID",
-            "latitude": "latitude",
-            "longitude": "longitude",
-            "maps_link": "google maps link",
-            "metadata": "metadata-information",
+            "address": "medellin",
+            "created": "2021-06-06T01:33:35.436695",
+            "id": "fb172720-c873-489f-9edc-8a4e58d3f892",
+            "latitude": "6.2476376",
+            "longitude": "-75.56581530000001",
+            "maps_link": "https://www.google.com/maps/@6.2476376,-75.56581530000001,13z",
+            "metadata": "metadata details."
             "user_id": "saduqz"
         },
         ...
@@ -94,15 +95,18 @@ Get a user
 
 ```
 [POST] /geocode/{user-id}
+address: String of the address. e.g. "Medellin", "Bogota", "Colombia".
+zoom: This is the zoom used in google maps website. "10.5z" is the default value.
+
 {
   "address": "Bogota",
-  "zoom": "13z"  # This is the zoom used in google maps website. "10.5z" is the default value.
+  "zoom": "13z"  
 }
 
 # response
 {
-    'maps_link': "google maps link",
-    'latitude': "latitude",
-    'longitude': longitude,
+    "latitude": "6.2476376",
+    "longitude": "-75.56581530000001",
+    "maps_link": "https://www.google.com/maps/@6.2476376,-75.56581530000001,13z"
 }
 ```
